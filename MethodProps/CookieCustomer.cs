@@ -9,14 +9,24 @@ namespace MethodProps
     public class CookieCustomer
     {
         public int Id { get; }
-        public string Name { get; set; }
+        private string _name;
+
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                ValidateName(value, nameof(Name));
+                _name = value;
+            }
+        }
         public string? Notes { get; set; }
 
         public char NameFirstChar => Name[0];
 
         public CookieCustomer(int id, string name, string? notes = null)
         {
-            ValidateName(name, nameof(name));
+            //ValidateName(name, nameof(name));
             ValidateId(id, nameof(id));
                 
             //if (id < 0)
